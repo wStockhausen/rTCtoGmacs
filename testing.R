@@ -1,4 +1,8 @@
 #----------testing-----------
+#--testing reading input data files---------------------------------------------
+lstID = readTCSAM_InputDataFiles(mcFN="./inst/testExample/M21.22a.MCI.inp");
+
+#--testing individual input components------------------------------------------
 #require(tmbTCSAM02);
 fns = list.files(path="./R",pattern="*.R",full.names=TRUE);
 for (fn in fns) source(fn);
@@ -6,8 +10,7 @@ for (fn in fns) source(fn);
 setGlobals();
 ls(all.names=TRUE);
 
-#fn_mc = "./inst/exampleOld/M21.13.MCI.inp";
-fn_mc = "./inst/example21_13/M21.13.MCI.inp";
+fn_mc = "./inst/testExample/M21.22a.MCI.inp";
 mc = readTCSAM_ModelConfiguration(fn_mc);
 
 #--read fn_datasets
@@ -59,6 +62,5 @@ topDir = "./";
 if (exists("fn")) topDir = dirname(fn);
 cat(paste0("--topDir = '",topDir,"'\n"));
 paramsInfo = readTCSAM_ModelParametersInfo(file.path(topDir,mc$fn_paramsInfo));
-
 
 tst = readTCSAM_ModelParametersInfo(file.path(dirname(fn_mc),mc$mc$fn_paramsInfo));

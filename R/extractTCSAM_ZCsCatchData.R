@@ -20,7 +20,7 @@ extractTCSAM_ZCsCatchData<-function(res,
   k<-ks;
   kw<-res[[k]]; k<-k+1;
   if (!(kw %in% .KEYWORDS[["SIZE_FREQUENCY_DATA_TYPES"]])){
-    msg<-paste0("----Error extracting size composition data.\n",
+    msg<-paste0("----rTCtoGmacs::extractTCSAM_ZCsCatchData: Error extracting size composition data.\n",
                 "----Expected one of the following keywords:\n",
                 "----",paste0("'",.KEYWORDS[["SIZE_FREQUENCY_DATA_TYPES"]],"'",collapse=", "),"\n",
                 "----but got '",kw,"\n");
@@ -40,17 +40,17 @@ extractTCSAM_ZCsCatchData<-function(res,
   lst[["nFCs"]]     <-as.integer(res[[k]]); k<-k+1;
   #loop over factor combinations
   nZBs<-length(lst[["zBs"]]);
-  dfr<-NULL;
+  dfr<-list(); ctr = 0;
   for (i in 1:lst[["nFCs"]]){
     fc<-res[[k]]; k<-k+1;
     for (j in 1:lst[["nY"]]){
       rw<-res[[k]]; k<-k+1;
       us<-as.integer(rw[1]);
-      dm<-as.integer(rw[1]);
-      yr<-as.integer(rw[1]);
-      ss<-as.numeric(rw[2]);
-      vls<-as.numeric(rw[3:length(rw)]);
-      dfr<-rbind(dfr,
+      dm<-as.integer(rw[2]);
+      yr<-as.integer(rw[3]);
+      ss<-as.numeric(rw[4]);
+      vls<-as.numeric(rw[5:length(rw)]);
+      dfr[[ctr<-ctr+1]] = 
                  data.frame(x=rep(fc[1],nZBs),
                             m=rep(fc[2],nZBs),
                             s=rep(fc[3],nZBs),
@@ -60,9 +60,10 @@ extractTCSAM_ZCsCatchData<-function(res,
                             y  =rep(yr,nZBs),
                             ss =rep(ss,nZBs),
                             val=vls,
-                            stringsAsFactors=FALSE));
+                            stringsAsFactors=FALSE);
     }#--j
   }#--i
+  dfr = dplyr::bind_rows(dfr);
   dfr$x<-subUndetermined(dfr$x);
   dfr$m<-subUndetermined(dfr$m);
   dfr$s<-subUndetermined(dfr$s);

@@ -1,0 +1,18 @@
+#--Gmacs Seasonal Information for Tanner crab model
+3    #--number of model seasons
+3    # Season recruitment occurs          (?beginning or end of season?)                                                                                            
+3    # Season molting and growth occurs   (?beginning or end of season?)                                                                                                
+3    # Season to calculate SSB            (?beginning or end of season?)                                                                                            
+1    # Season for N output                (?beginning or end of season?) 
+#---------------------------                                                                                       
+#    Natural    mortality    per    season    input    type    (1    =    vector    by    "season,"    2    =    matrix    by    season/year)                                                        
+1    # OK                                                                                                            
+#    Proportion of the total    natural    mortality to be    applied    each    season                                                                                                
+0.62 #--Season 1 OK?
+0.01 #--Season 2 OK? 0 in TCSAM02
+0.37 #--Season 3 OK?   
+#---------------------------                                                                                                             
+# Are the seasons instantaneous (0) or continuous (1)                                                                                                                        
+1 #--Season 1  OK
+1 #--Season 2  OK? - instantaeous in TCSAM02 (need to adjust M's above if changed)
+1 #--Season 3  OK    
